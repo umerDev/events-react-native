@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import { FlatList,Text,StyleSheet } from 'react-native';
 import EventCard from './EventCard';
 import ActionButton from 'react-native-action-button';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-
-const events = require('../data.json').events.map(evt => ({
-        ...evt,
-        timer: Date.now(),
-    }),
-); 
+import { getEventsAxios } from '../Scripts/api';
 
 const styles = StyleSheet.create({
     list: {
@@ -27,9 +19,22 @@ class EventList extends Component {
     }
 
     componentDidMount() {
+        console.log(`mounting data`);
         setInterval(() => {
-            this.setState({events});
+            this.setState({
+                events: this.state.events.map(evt => ({
+                    ...evt,
+                    timer: Date.now(),
+                })),
+            });
         }, 1000); 
+        
+       
+        getEventsAxios().then(events => this.setState({ events }));
+    }
+
+    componentDidUpdate(){
+        getEventsAxios().then(events => this.setState({ events }));
     }
 
     componentWillUnmount(){
@@ -38,7 +43,7 @@ class EventList extends Component {
 
     handleAddEvent = () =>
     {
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('Add Event');
     }
 
     render() {

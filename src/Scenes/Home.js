@@ -6,12 +6,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ebebeb'
+    backgroundColor: '#ebebeb',
+    padding:20,
+    margin:30
   },
   text: {
     color: '#101010',
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlignVertical: 'top'
   }
 });
 
@@ -31,7 +34,13 @@ class Home extends Component {
                 onPress={this.handleAddPress}
                 title="Login ¬!"
                 color="#841584"
-                accessibilityLabel="Learn more about this purple button"
+                accessibilityLabel="Enter your details, then login."
+            />
+            <Button
+                onPress={this.handleAddPress}
+                title="Create Account ¬!"
+                color="#841584"
+                accessibilityLabel="Enter your details, then login."
             />
         </View>
     )};
